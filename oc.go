@@ -52,6 +52,10 @@ func (o *Oc) Delete(key string) {
 	}
 }
 
+func (o *Oc) Len() int {
+	return len(o.set)
+}
+
 func (o *Oc) Next() bool {
 
 	// first time through
