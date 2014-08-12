@@ -63,14 +63,10 @@ func (o *Oc) Next() bool {
 		o.cur = o.list.Front()
 		return true
 	}
-	// end of list
-	if o.cur.Next() == nil {
-		o.cur = nil
-		return false
-	}
-	// normal iteration
+
 	o.cur = o.cur.Next()
-	return true
+
+	return o.cur != nil
 
 }
 
