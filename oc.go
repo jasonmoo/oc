@@ -142,12 +142,6 @@ func strcmp(a, b string) int {
 	}
 
 	// return the shorter
-	if len(a) == 0 {
-		if len(b) == 0 {
-			return 0
-		}
-		return -1
-	}
-	return 1
+	return len(a) - len(b)
 
 }
