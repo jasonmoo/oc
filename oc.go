@@ -17,11 +17,12 @@ type (
 		key string
 		ct  int64
 	}
+	order int
 )
 
 const (
-	ASC  = 1
-	DESC = -1
+	ASC  order = 1
+	DESC order = -1
 )
 
 func NewOc() *Oc {
@@ -75,9 +76,10 @@ func (o *Oc) KeyValue() (string, int64) {
 	return e.key, e.ct
 }
 
-func (o *Oc) SortByKey(dir int) {
+func (o *Oc) SortByKey(dir order) {
 
 	cursor := o.list.Front()
+	d := int(dir)
 
 	for cursor != nil {
 
@@ -85,15 +87,14 @@ func (o *Oc) SortByKey(dir int) {
 		prev, next := cursor.Prev(), cursor.Next()
 
 		// move backward until a cmp has been found
-		for prev != nil && strcmp(prev.Value.(*element).key, cursor.Value.(*element).key)*dir > 0 {
+		for prev != nil && strcmp(prev.Value.(*element).key, cursor.Value.(*element).key)*d > 0 {
 			prev = prev.Prev()
 		}
 
 		if prev == nil {
 			o.list.MoveToFront(cursor)
 		} else if prev != cursor.Prev() {
-			o.list.Remove(cursor)
-			o.list.InsertAfter(cursor.Value, prev)
+			o.list.MoveAfter(cursor, prev)
 		}
 
 		cursor = next
@@ -102,7 +103,7 @@ func (o *Oc) SortByKey(dir int) {
 
 }
 
-func (o *Oc) SortByCt(dir int) {
+func (o *Oc) SortByCt(dir order) {
 
 	cursor := o.list.Front()
 	d := int64(dir)
@@ -120,8 +121,7 @@ func (o *Oc) SortByCt(dir int) {
 		if prev == nil {
 			o.list.MoveToFront(cursor)
 		} else if prev != cursor.Prev() {
-			o.list.Remove(cursor)
-			o.list.InsertAfter(cursor.Value, prev)
+			o.list.MoveAfter(cursor, prev)
 		}
 
 		cursor = next
