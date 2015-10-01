@@ -15,7 +15,7 @@ type (
 
 	element struct {
 		key string
-		ct  int64
+		ct  int
 	}
 	order int
 )
@@ -32,7 +32,7 @@ func NewOc() *Oc {
 	}
 }
 
-func (o *Oc) Increment(key string, val int64) {
+func (o *Oc) Increment(key string, val int) {
 
 	if el, exists := o.set[key]; exists {
 		el.Value.(*element).ct += val
@@ -42,7 +42,7 @@ func (o *Oc) Increment(key string, val int64) {
 
 }
 
-func (o *Oc) Decrement(key string, val int64) {
+func (o *Oc) Decrement(key string, val int) {
 	o.Increment(key, -val)
 }
 
@@ -71,7 +71,7 @@ func (o *Oc) Next() bool {
 
 }
 
-func (o *Oc) KeyValue() (string, int64) {
+func (o *Oc) KeyValue() (string, int) {
 	e := o.cur.Value.(*element)
 	return e.key, e.ct
 }
@@ -106,7 +106,7 @@ func (o *Oc) SortByKey(dir order) {
 func (o *Oc) SortByCt(dir order) {
 
 	cursor := o.list.Front()
-	d := int64(dir)
+	d := int(dir)
 
 	for cursor != nil {
 

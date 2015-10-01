@@ -1,9 +1,9 @@
-=== RUN: ExampleInsertionOrder
+=== RUN   ExampleInsertionOrder
 --- PASS: ExampleInsertionOrder (0.00s)
-=== RUN: ExampleKeySortedOrder
+=== RUN   ExampleKeySortedOrder
 --- PASS: ExampleKeySortedOrder (0.00s)
-=== RUN: ExampleCtSortedOrder
+=== RUN   ExampleCtSortedOrder
 --- PASS: ExampleCtSortedOrder (0.00s)
 PASS
-BenchmarkIncrement	50000000	        31.8 ns/op	       0 B/op	       0 allocs/op
-ok  	github.com/jasonmoo/oc	1.631s
+BenchmarkIncrement-4	100000000	        10.9 ns/op	       0 B/op	       0 allocs/op
+ok  	github.com/jasonmoo/oc	1.104s
